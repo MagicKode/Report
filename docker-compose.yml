@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+
+  #activemqContainers
+  activemq:
+    #name: myactivemq
+    #Define hostname
+    hostname: myactivemq
+    #Mirror used
+    image: webcenter/activemq
+    #Container's mapping port
+    ports:
+      - "61616:61616" # broker (admin:adminactivemq)(amq:amq)
+      - "8161:8161"   # web    http://localhost:8161/admin (admin:admin)    restart: always
+    #Define mount point
+    volumes:
+      - ./data/activemq:/data/activemq
+      - ./var/log/activemq:/var/log/activemq
