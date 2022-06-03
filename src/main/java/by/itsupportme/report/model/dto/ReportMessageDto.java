@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -15,8 +16,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 public class ReportMessageDto {
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private /*LocalDate*/ Date startDate;
+    private /*LocalDate*/ Date endDate;
     private Long minStockLevel;
     private RetailerDto retailer;
 }
