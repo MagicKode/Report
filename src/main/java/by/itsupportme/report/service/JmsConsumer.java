@@ -1,30 +1,18 @@
 package by.itsupportme.report.service;
 
-import by.itsupportme.report.model.dto.ProductDto;
 import by.itsupportme.report.model.dto.ReportMessageDto;
+import by.itsupportme.report.service.report.impl.Reporter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class JmsConsumer {
-    private final FeignClientService feignClientService;
+    private final Reporter reporter;
 
     @JmsListener(destination = "${activemq.topic}")
-    public void onMessage(ReportMessageDto reportMessageDto) {
-        System.out.println("receive this message from activemq: " + reportMessageDto);
-        ProductDto productDto = feignClientService.findById(3L);
-        System.out.println(productDto);
-        List<ProductDto> products = feignClientService
-                .findAllByRetailerNameAndStockLevel(
-                        reportMessageDto.getRetailer().getName(),
-                        reportMessageDto.getMinStockLevel(),
-                        reportMessageDto.getStartDate(),
-                        reportMessageDto.getEndDate()
-                );
-        System.out.println(products);
+    public void onMessage(ReportMessageDto reportMessageDto){
+        reporter.creatReport(reportMessageDto);
     }
 }
