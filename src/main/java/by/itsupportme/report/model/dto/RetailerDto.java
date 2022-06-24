@@ -12,5 +12,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RetailerDto {
+    private Long id;
     private String name;
 }

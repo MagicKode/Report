@@ -10,14 +10,13 @@ import java.util.List;
 
 @FeignClient(value = "product-instance-client", url = "${product-api.url}")
 public interface FeignClientService {
-    @RequestLine("GET /products/")
-    List<ProductDto> findAll();
-    @RequestLine("GET /products/{id}")
-    ProductDto findById(@Param Long id);
-    @RequestLine("GET /products/byParams/?retailerName={retailerName}&stockLevel={stockLevel}&startDate={startDate}&endDate={endDate}")
-    List<ProductDto> findAllRetailerNameByStockLevelByStartDateByEndDate(
+    @RequestLine("GET " +
+            "/products" +
+            "/findByStockLevelGreaterThanEqualAndRetNameAndDateBetweenCreatedAtDates" +
+            "/?retailerName={retailerName}&minStockLevel={minStockLevel}&startDate={startDate}&endDate={endDate}")
+    List<ProductDto> findAllByRetailerNameByStockLevelByStartDateByEndDate(
             @Param String retailerName,
-            @Param Long stockLevel,
+            @Param Long minStockLevel,
             @Param LocalDateTime startDate,
             @Param LocalDateTime endDate
     );

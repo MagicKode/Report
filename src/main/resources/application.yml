@@ -1,5 +1,5 @@
 server:
-  port: {server.port}
+  port: { server.port }
 spring:
   config:
     import: optional:configserver:http://localhost:8888
@@ -8,3 +8,13 @@ feign:
     config:
       default:
         contract: feign.Contract.Default
+
+
+document.path:  C:\\DZ\\IT\\Projects\\ProjectManager\\
+document.format: xlsx
+
+workbook.name: ReportExcel-
+sheet.name: ProductReport
+
+
+
