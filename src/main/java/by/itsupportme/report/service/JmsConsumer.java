@@ -1,7 +1,7 @@
 package by.itsupportme.report.service;
 
 import by.itsupportme.report.model.dto.ReportMessageDto;
-import by.itsupportme.report.service.report.Reporter;
+import by.itsupportme.report.service.report.ReportHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class JmsConsumer {
-    private final Reporter reporter;
+    private final ReportHandler reportHandler;
 
     @JmsListener(destination = "${activemq.topic}")
     public void onMessage(ReportMessageDto reportMessageDto) {
-        reporter.reportCreation(reportMessageDto);
+        reportHandler.handle(reportMessageDto);
     }
 }

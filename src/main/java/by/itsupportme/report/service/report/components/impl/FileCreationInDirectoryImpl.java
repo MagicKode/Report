@@ -20,18 +20,11 @@ public class FileCreationInDirectoryImpl implements FileCreationInDirectory {
     private String filePath;
 
     @Override
-    public void createFileInDirectory(XSSFWorkbook workbook){
+    public String createFileInDirectory(XSSFWorkbook workbook) throws IOException {
         String fileLocation = filePath + workBookName + System.currentTimeMillis() + "." + documentFormat;
-        try {
-            FileOutputStream outputStream = new FileOutputStream(fileLocation);
+        try (FileOutputStream outputStream = new FileOutputStream(fileLocation)) {
             workbook.write(outputStream);
-        } catch (IOException e) { //TODO обработать исключения
-            e.printStackTrace(); // what else can be done here?
-            //надо будет статус entity переводить в error
         }
-//        finally {
-//            workbook.close();
-//        }
-//    close all (in Finely)
+        return fileLocation;
     }
 }

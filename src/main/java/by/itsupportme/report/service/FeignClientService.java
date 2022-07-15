@@ -20,4 +20,14 @@ public interface FeignClientService {
             @Param LocalDateTime startDate,
             @Param LocalDateTime endDate
     );
+
+    @RequestLine("GET " +
+            "/products" +
+            "/getQuantityOfProductByRetNameAndDateBetweenCreatedAtDates" +
+            "/?retailerName={retailerName}&startDate={startDate}&endDate={endDate}")
+    Long getQuantityOfProductByRetailerNameByStartDateByEndDate(
+            @Param String retailerName,
+            @Param LocalDateTime startDate,
+            @Param LocalDateTime endDate
+    );
 }
